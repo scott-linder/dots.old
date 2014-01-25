@@ -1,0 +1,72 @@
+general {
+        colors = true
+        interval = 1
+}
+
+order += "disk /"
+order += "disk /home"
+order += "ethernet eth0"
+order += "ethernet eth1"
+order += "wireless wlan0"
+order += "battery 1"
+order += "load"
+order += "cpu_temperature 0"
+order += "volume master"
+order += "time"
+
+wireless wlan0 {
+        format_up = "W: (%quality at %essid) %ip"
+        format_down = "W: down"
+}
+
+ethernet eth0 {
+        # if you use %speed, i3status requires root privileges
+        format_up = "E0: %ip"
+        format_down = "E0: down"
+}
+
+ethernet eth1 {
+        # if you use %speed, i3status requires root privileges
+        format_up = "E1: %ip"
+        format_down = "E1: down"
+}
+
+battery 1 {
+        format = "%status %percentage %remaining"
+}
+
+run_watch DHCP {
+        pidfile = "/var/run/dhclient*.pid"
+}
+
+run_watch VPN {
+        pidfile = "/var/run/vpnc/pid"
+}
+
+time {
+        format = "%A(%d)-%b(%m) %r"
+}
+
+load {
+        format = "%1min"
+}
+
+cpu_temperature 0 { 
+        format = "%degrees°C"
+        path = "/sys/devices/platform/coretemp.0/temp2_input"
+}
+
+disk "/" {
+        format = "%free"
+}
+
+disk "/home" {
+        format = "%free"
+}
+
+volume master {
+    format = "V: %volume"
+    device = "default"
+    mixer = "Master"
+    mixer_idx = 0
+}

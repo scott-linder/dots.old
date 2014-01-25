@@ -1,0 +1,13 @@
+# mplayer config
+
+zoom=yes
+dvd-device=/dev/sr0
+
+# OSD Configuration (Defaults Commented)
+osdlevel=3
+font='Droid Sans Mono Slashed'
+#subfont-blur=2
+subfont-outline=3
+subfont-osd-scale=1
+#subfont-text-scale=5
+progbar-align=90
