@@ -42,6 +42,12 @@ if has("autocmd")
     au FileType python setl nosmartindent
 endif
 
+" Markdown
+if has("autocmd")
+    au BufRead,BufNewFile *.md set filetype=md
+endif
+map <Leader>lm :w !markdown % > `basename % .md`.html<Enter><Enter>
+
 " Allow first line of paragraph to have its own indentation
 set fo+=2
 
