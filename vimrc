@@ -44,7 +44,7 @@ endif
 
 " Markdown
 if has("autocmd")
-    au BufRead,BufNewFile *.md set filetype=md
+    au BufRead,BufNewFile *.md set filetype=markdown
 endif
 map <Leader>lm :w !markdown % > `basename % .md`.html<Enter><Enter>
 
