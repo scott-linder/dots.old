@@ -61,6 +61,9 @@ set smartcase
 " Incremental search
 set incsearch
 
+" Per-file modelines
+set modeline
+
 " auto-complete paths (C-N)
 set path+=/usr/include/**
 
