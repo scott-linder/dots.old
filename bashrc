@@ -40,6 +40,7 @@ alias imgf='sxiv -d'
 alias wcam='wxcam'
 alias wcam-config='guvcview'
 alias videdit='openshot'
+alias md='blackfriday-tool -page'
 alias allinstalled="pacman-color -Qei | awk '/^Name/ { name=\$3 } /^Groups/ { if ( \$3 != \"base\" && \$3 != \"base-devel\" ) { print name } }'"
 alias updatemirrors='sudo reflector -l 5 --sort rate --save /etc/pacman.d/mirrorlist'
 cl() {
