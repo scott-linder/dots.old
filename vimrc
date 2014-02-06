@@ -46,7 +46,7 @@ endif
 if has("autocmd")
     au BufRead,BufNewFile *.md set filetype=markdown spell
 endif
-map <Leader>lm :w !markdown % > `basename % .md`.html<Enter><Enter>
+map <Leader>lm :w !md % > `basename % .md`.html<Enter><Enter>
 
 " Allow first line of paragraph to have its own indentation
 set fo+=2
