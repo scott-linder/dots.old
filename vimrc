@@ -53,6 +53,8 @@ set fo+=2
 
 " Line Numbers
 set number
+" Realative Line Numbers
+set relativenumber
 
 " Smart Search (case sensitive when upper-case letters are in search)
 set ignorecase
