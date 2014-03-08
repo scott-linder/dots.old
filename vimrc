@@ -66,6 +66,12 @@ set incsearch
 " Per-file modelines
 set modeline
 
+" Better ex command completion (think dmenu)
+set wildmenu
+
+" Always show at least one line of context on both sides of cursro.
+set scrolloff=1
+
 " auto-complete paths (C-N)
 set path+=/usr/include/**
 
