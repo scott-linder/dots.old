@@ -98,7 +98,7 @@ noremap <A-h> gT
 noremap <A-l> gt
 
 " Always show status line
-"set laststatus=2
+set laststatus=2
 
 " Don't preview one line of minimized windows
 set wmh=0
