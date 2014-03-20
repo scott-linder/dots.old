@@ -21,7 +21,7 @@ set nojoinspaces
 
 " Wrap lines and indicate when they are wrapped
 set wrap
-set showbreak=»
+set showbreak=…
 
 " Four spaces instead of tabs
 set expandtab
