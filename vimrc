@@ -19,8 +19,9 @@ set fillchars=vert:│,fold:─,diff:─
 " Don't use two spaces between sentences
 set nojoinspaces
 
-" Wrap lines and indicate when they are wrapped
+" Wrap lines at reasonable characters and indicate when they are wrapped
 set wrap
+set linebreak
 set showbreak=…
 
 " Four spaces instead of tabs
