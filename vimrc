@@ -1,5 +1,8 @@
 " vimrc
 
+" If we happen to be using a non-sh compatible shell.
+set shell=/bin/sh
+
 " My TTY has a color ribbon.
 syntax on
 
