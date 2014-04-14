@@ -52,6 +52,11 @@ if has("autocmd")
 endif
 map <Leader>md :w<Enter> :!md "%" > "$(basename "%" .md).html"<Enter><Enter>
 
+" Golang
+if has("autocmd")
+    au BufWritePre *.go Fmt
+endif
+
 " Allow first line of paragraph to have its own indentation
 set fo+=2
 
