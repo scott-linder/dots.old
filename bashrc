@@ -16,7 +16,7 @@ export CC=clang
 export CXX=clang++
 
 # ARM toolchain for raspberry pi development
-export PATH=$PATH:$HOME/programming/builds/pi/tools/arm-bcm2708/arm-bcm2708hardfp-linux-gnueabi/bin
+export PATH=$PATH:$HOME/programming/builds/tools/arm-bcm2708/arm-bcm2708hardfp-linux-gnueabi/bin
 # Small utility scripts
 export PATH=$PATH:$HOME/programming/scripts/
 
