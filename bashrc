@@ -15,6 +15,10 @@ export SUDO_EDITOR="rgvim -f"
 export CC=clang
 export CXX=clang++
 
+# Golang
+export GOPATH=$HOME/programming/projects/go/
+export PATH=$PATH:$GOPATH/bin
+
 # ARM toolchain for raspberry pi development
 export PATH=$PATH:$HOME/programming/builds/tools/arm-bcm2708/arm-bcm2708hardfp-linux-gnueabi/bin
 # Small utility scripts
@@ -32,7 +36,7 @@ alias ll='ls -hal'
 alias cls='clear && pwd && ls --color=auto --group-directories-first'
 alias v='gvim'
 alias vv='vim'
-alias sx='startx'
+alias sx='ssh-agent startx'
 alias du='du -h'
 alias def='sdcv'
 alias img='sxiv'
@@ -51,9 +55,6 @@ cl() {
 cll() {
     cl -hal "$@"
 }
-
-# Golang GVM
-[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
 # Less (heh) colored output
 export LESS="-R"
