@@ -224,6 +224,7 @@ workspace_auto_back_and_forth yes
 # Some games prefer to be floating
 for_window [class="shank*"] floating enable
 for_window [title="SFML*"] floating enable
+for_window [class="Ssh-askpass"] floating enable
 
 # Some window types have their own workspaces
 assign [class="Firefox"] → $ws2
