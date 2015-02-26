@@ -88,15 +88,15 @@ let NERDTreeQuitOnOpen = 1
 au FileType python setl nosmartindent
 
 " Markdown
-au BufRead,BufNewFile *.md set filetype=markdown spell
-au FileType markdown noremap <Leader>r :!markdown "%" > "$(basename "%" .md).html"<cr><cr>
+au BufRead,BufNewFile *.md setl filetype=markdown spell
+au FileType markdown noremap <buffer> <Leader>r :!markdown "%" > "$(basename "%" .md).html"<cr><cr>
 
 " R
-au FileType r noremap <leader>r :!clear && R --vanilla <% \| less<cr>
+au FileType r noremap <buffer> <leader>r :!clear && R --vanilla <% \| less<cr>
 
 " Rust
-au FileType rust setlocal keywordprg=uzbl-rust-std
-au FileType rust noremap <leader>r :!clear && cargo run<cr>
-au FileType rust noremap <leader>t :!clear && cargo test<cr>
-au FileType rust noremap <leader>b :!clear && cargo build<cr>
-au FileType rust noremap <leader>c :!clear && cargo clean<cr>
+au FileType rust setl keywordprg=uzbl-rust-std
+au FileType rust noremap <buffer> <leader>r :!clear && cargo run<cr>
+au FileType rust noremap <buffer> <leader>t :!clear && cargo test<cr>
+au FileType rust noremap <buffer> <leader>b :!clear && cargo build<cr>
+au FileType rust noremap <buffer> <leader>c :!clear && cargo clean<cr>
