@@ -1,3 +1,4 @@
+set __fish_prompt_hostname (hostname | cut -d . -f 1)
 set __fish_git_prompt_showdirtystate 'yes'
 set __fish_git_prompt_showstashstate 'yes'
 set __fish_git_prompt_showupstream 'yes'
@@ -21,7 +22,6 @@ function fish_prompt --description 'Write out the prompt'
     set -l git_prompt (__fish_git_prompt '%s')
     set -l home_escaped (echo -n $HOME | sed 's/\//\\\\\//g')
     set -l pwd (echo -n $PWD | sed "s/^$home_escaped/~/")
-    set -l host (hostname -s)
     set -l prompt_symbol ''
     switch $USER
         case root; set prompt_symbol '#'
@@ -30,7 +30,7 @@ function fish_prompt --description 'Write out the prompt'
     __prompt_section_start
     printf '%s%s' (set_color green) "$USER"
     printf '%s@' (set_color normal)
-    printf '%s%s' (set_color cyan) "$host"
+    printf '%s%s' (set_color cyan) "$__fish_prompt_hostname"
     __prompt_section_next
     printf '%s%s' (set_color $fish_color_cwd) "$pwd"
     if test -n "$git_prompt"
