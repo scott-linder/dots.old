@@ -94,6 +94,7 @@ au FileType markdown noremap <buffer> <Leader>r :!markdown "%" > "$(basename "%"
 
 " R
 au FileType r noremap <buffer> <leader>r :!clear && R --vanilla <% \| less<cr>
+au FileType r noremap <buffer> <leader>p :!evince Rplots.pdf >/dev/null 2>&1 &<cr>
 
 " Rust
 au FileType rust setl keywordprg=uzbl-rust-std
