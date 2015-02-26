@@ -59,7 +59,7 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
 if isdirectory($HOME . '/.vim/undo') == 0
     :silent !mkdir -p ~/.vim/undo >/dev/null 2>&1
 endif
-set undodir=~/.vim/undo/
+set undodir=~/.vim/undo//
 set undofile
 
 "" Plugins
