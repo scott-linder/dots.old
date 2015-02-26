@@ -1,0 +1,19 @@
+URxvt*saveLines: 12000
+URxvt*transparent: false
+URxvt*foreground: white
+URxvt*background: #1c1c1c
+URxvt*font: xft:Droid Sans Mono:pixelsize=14:antialias=true:hinting=true
+URxvt*boldFont: xft:Droid Sans Mono:bold:pixelsize=14:antialias=true:hinting=true
+URxvt*scrollBar: false
+URxvt*color4: RoyalBlue
+URxvt*color12: RoyalBlue
+URxvt*perl-ext-common: default,matcher,selection-to-clipboard,font-size
+URxvt*url-launcher: /usr/bin/firefox
+URxvt*matcher*button: 1
+URxvt*keysym.C-S-Up: perl:font-size:increase
+URxvt*keysym.C-S-Down: perl:font-size:decrease
+URxvt*iso14755: false
+URxvt*iso14755_52: false
+
+ssh-askpass*foreground: white
+ssh-askpass*background: #1c1c1c
