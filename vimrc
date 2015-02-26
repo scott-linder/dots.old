@@ -13,6 +13,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-sleuth'
+Plug 'dag/vim-fish'
 call plug#end()
 
 "" VIM
