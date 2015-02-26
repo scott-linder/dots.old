@@ -3,9 +3,6 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# vi prompt editing
-set -o vi
-
 # XXX: This is just a hack b/c noone has terminfo for termite
 export TERM=xterm-color
 
