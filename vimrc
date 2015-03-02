@@ -21,6 +21,7 @@ call plug#end()
 " Looks
 colorscheme molokai
 set fillchars=vert:│,fold:─,diff:─
+set t_Co=256
 
 " Lines
 set colorcolumn=80,81
