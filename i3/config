@@ -93,10 +93,16 @@ hide_edge_borders both
 new_window none
 bindsym $mod+u border none
 bindsym $mod+Shift+U border normal
+
 bindsym $mod+b exec chromium
+
 bindsym $mod+s exec scrot
 bindsym $mod+Shift+S exec "scrot -w"
-bindsym $mod+F6 exec "xbacklight -time 0 - 10"
-bindsym $mod+F7 exec "xbacklight -time 0 + 10"
+
+bindsym XF86MonBrightnessDown exec --no-startup-id "xbacklight -time 0 - 10"
+bindsym XF86MonBrightnessUp exec --no-startup-id "xbacklight -time 0 + 10"
+
+bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume 0 -5%"
+bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume 0 +5%"
 
 bindsym $mod+m exec "scrot -u"
