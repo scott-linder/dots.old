@@ -1,94 +1,51 @@
-# i3wm config
+# i3 config file (v4)
+#
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-# mod3, which is actually the left alt key now
-set $mod Mod3
-
-# font for window titles. ISO 10646 = Unicode
-#font -local-default-medium-r-normal--16-60-75-75-C-60-iso8859-1
-font pango:Droid Sans Mono Slashed Bold 10
-
-# Window Decoration colors
-# class                 border  backgr. text    indicator
-client.focused          #4090f0 #2c2c2c #dcdccc #000000
-client.focused_inactive #2c2c2c #2c2c2c #dcdccc #000000
-client.unfocused        #2c2c2c #2c2c2c #dcdccc #000000
-client.urgent           #c00000 #2c2c2c #dcdccc #000000
-
-# Use Mouse+$mod to drag floating windows to their wanted position
+set $mod Mod1
 floating_modifier $mod
 
-# start a terminal
-#bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec termite
+font pango:Droid Sans Mono Bold 9
 
-# kill focused window
-bindsym $mod+Shift+Q kill
+bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Shift+q kill
 
-# start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec --no-startup-id dmenu_run
 
-# change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
-# Focus on parent/child
-bindsym $mod+a focus parent
-bindsym $mod+Shift+A focus child
-force_focus_wrapping true
-
-# move focused window
-bindsym $mod+Shift+H move left
-bindsym $mod+Shift+J move down
-bindsym $mod+Shift+K move up
-bindsym $mod+Shift+L move right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
-
-# split in horizontal orientation
 bindsym $mod+c split h
-
-# split in vertical orientation
 bindsym $mod+v split v
 
-# enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen
+bindsym $mod+f fullscreen toggle
 
-# change container layout (stacked, tabbed, default)
-# bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+e layout default
+bindsym $mod+e layout toggle split
+bindsym $mod+a focus parent
+bindsym $mod+Shift+a focus child
 
-# toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
-# I'm only going to say this once...
-set $ws1 1(term)
-set $ws2 2(web)
-set $ws3 3(chat)
-set $ws4 4(mail)
-set $ws5 5(vbox)
-set $ws6 6()
-set $ws7 7(image)
-set $ws8 8(office)
-set $ws9 9(game)
-set $ws10 10(steam)
+set $ws1 1
+set $ws2 2
+set $ws3 3
+set $ws4 4
+set $ws5 5
+set $ws6 6
+set $ws7 7
+set $ws8 8
+set $ws9 9
+set $ws0 10
 
-# switch to workspace
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
@@ -98,139 +55,48 @@ bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
-bindsym $mod+0 workspace $ws10
+bindsym $mod+0 workspace $ws0
 
-# move focused container to workspace
-bindsym $mod+Shift+exclam       move container to workspace $ws1
-bindsym $mod+Shift+at           move container to workspace $ws2
-bindsym $mod+Shift+numbersign   move container to workspace $ws3
-bindsym $mod+Shift+dollar       move container to workspace $ws4
-bindsym $mod+Shift+percent      move container to workspace $ws5
-bindsym $mod+Shift+asciicircum  move container to workspace $ws6
-bindsym $mod+Shift+ampersand    move container to workspace $ws7
-bindsym $mod+Shift+asterisk     move container to workspace $ws8
-bindsym $mod+Shift+parenleft    move container to workspace $ws9
-bindsym $mod+Shift+parenright   move container to workspace $ws10
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws0
 
-# scratchpad for music player etc
-bindsym $mod+Shift+plus move scratchpad
-bindsym $mod+plus scratchpad show
-# Music Player
-bindsym $mod+minus [title="MPD"] scratchpad show
-bindsym XF86Tools [title="MPD"] scratchpad show
-# Steam Chat
-bindsym $mod+Shift+minus [title="Chat"] scratchpad show
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-# reload the configuration file
-bindsym $mod+Shift+C reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+R restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+E exit
-
-# resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
         bindsym h resize shrink width 10 px or 10 ppt
         bindsym j resize grow height 10 px or 10 ppt
         bindsym k resize shrink height 10 px or 10 ppt
         bindsym l resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym 113 resize shrink width 10 px or 10 ppt
-        bindsym 116 resize grow height 10 px or 10 ppt
-        bindsym 111 resize shrink height 10 px or 10 ppt
-        bindsym 114 resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
 bar {
-    # We only want to see this when mod4 (windows key) is down
-    mode hide
-    modifier Mod4
-    position bottom
-    font pango:Droid Sans Mono Slashed Bold 10
-    status_command i3status
-    colors {
-        background #2c2c2c
-        statusline #dcdccc
-        separator #dcdccc
-
-        # class             border  bg      text
-        focused_workspace   #4c7899 #285577 #ffffff
-        active_workspace    #333333 #5f676a #ffffff
-        inactive_workspace  #333333 #222222 #888888
-        urgent_workspace    #2f343a #900000 #ffffff
-    }
+        status_command i3status
 }
 
-# Don't usually want borders, but may need them for the titlebar
+workspace_auto_back_and_forth yes
+focus_follows_mouse no
+hide_edge_borders both
 new_window none
 bindsym $mod+u border none
 bindsym $mod+Shift+U border normal
-#bindsym $mod+i border 1pixel
-hide_edge_borders both
+bindsym $mod+b exec chromium
+bindsym $mod+s exec scrot
+bindsym $mod+Shift+S exec "scrot -w"
+bindsym $mod+F6 exec "xbacklight -time 0 - 10"
+bindsym $mod+F7 exec "xbacklight -time 0 + 10"
 
-# For sound keys on laptop
-bindsym XF86AudioMute exec "amixer -q sset Master toggle"
-bindsym XF86AudioRaiseVolume exec "amixer -q sset Master 2%+"
-bindsym XF86AudioLowerVolume exec "amixer -q sset Master 2%-"
-bindsym XF86AudioPrev exec "mpc -q prev"
-bindsym XF86AudioNext exec "mpc -q next"
-bindsym XF86AudioPlay exec "mpc -q toggle"
-
-# Lock
-bindsym XF86ScreenSaver exec "i3lock -p win -i /home/scott/images/windows/windows.png"
-
-# For printscreen
-bindsym Print exec "scrot"
-bindsym $mod+Print exec "scrot -s"
-
-# Small script to cycle wallpapers
-bindsym $mod+Shift+B exec "wp.sh next"
-
-# Some misc app shortcuts
-bindsym $mod+b exec firefox
-bindsym $mod+g exec gimp
-bindsym $mod+i exec virtualbox
-bindsym $mod+m exec thunderbird
-#bindsym $mod+n exec pidgin
-bindsym $mod+n exec "termite -e weechat-curses"
-bindsym $mod+o exec libreoffice
-bindsym $mod+p exec evince
-bindsym $mod+s exec --no-startup-id steam
-bindsym $mod+Shift+S exec shotwell
-bindsym $mod+Shift+V exec gvim
-bindsym $mod+z exec zim
-
-# Mouse wont affect window focus
-focus_follows_mouse no
-
-# Press workspace again to return to last workspace
-workspace_auto_back_and_forth yes
-
-# Some games prefer to be floating
-for_window [class="shank*"] floating enable
-for_window [title="SFML*"] floating enable
-for_window [class="Ssh-askpass"] floating enable
-
-# Some window types have their own workspaces
-assign [class="Firefox"] → $ws2
-assign [class="Thunderbird"] → $ws4
-assign [class="Steam"] → $ws10
-
-# Some apps always get opened anyway
-exec firefox
-exec thunderbird
+bindsym $mod+m exec "scrot -u"

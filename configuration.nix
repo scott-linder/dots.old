@@ -10,12 +10,17 @@
       ./hardware-configuration.nix
     ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # Use the GRUB 2 boot loader.
+  boot.loader.grub.enable = true;
+  boot.loader.grub.version = 2;
+  # boot.loader.grub.efiSupport = true;
+  # boot.loader.grub.efiInstallAsRemovable = true;
+  # boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  # Define on which hard drive you want to install Grub.
+  boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
 
-  networking.hostName = "nixos"; # Define your hostname.
-  #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.hostName = "hafnium"; # Define your hostname.
+  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Select internationalisation properties.
   i18n = {
@@ -25,44 +30,28 @@
   };
 
   # Set your time zone.
-  time.timeZone = "America/NewYork";
+  time.timeZone = "America/New_York";
+
+  nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
-    wget
     vim
-    sway
-    xwayland
-    rxvt_unicode-with-plugins
     git
-    bash-completion
+    i3
     chromium
-    font-droid
-    dmenu
-    i3status
+    htop
+    rxvt_unicode
+    pciutils
   ];
 
-  hardware.opengl.enable = true;
-  
-  fonts = {
-  	fonts = with pkgs; [
-		font-droid
-	];
-
-	fontconfig.defaultFonts = {
-		serif = [
-			"Droid Serif"
-		];
-		sansSerif = [
-			"Droid Sans"
-		];
-		monospace = [
-			"Droid Sans Mono"
-		];
-
-	};
-  };
+  # Some programs need SUID wrappers, can be configured further or are
+  # started in user sessions.
+  programs.bash.enableCompletion = true;
+  # programs.mtr.enable = true;
+  # programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
+  programs.ssh.startAgent = true;
 
   # List services that you want to enable:
 
@@ -79,24 +68,34 @@
   # services.printing.enable = true;
 
   # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-  # services.xserver.layout = "us";
-  # services.xserver.xkbOptions = "eurosign:e";
+  services.xserver.enable = true;
+  services.xserver.windowManager.i3.enable = true;
+  services.xserver.layout = "us";
+  services.xserver.xkbOptions = "ctrl:nocaps";
+
+  # Enable touchpad support.
+  services.xserver.libinput.enable = true;
 
   # Enable the KDE Desktop Environment.
   # services.xserver.displayManager.sddm.enable = true;
   # services.xserver.desktopManager.plasma5.enable = true;
+  
+  fonts.fonts = with pkgs; [
+    corefonts
+    font-droid
+  ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.scott = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
     uid = 1000;
+    extraGroups = [ "wheel" ];
   };
 
-  boot.earlyVconsoleSetup = true;
-
-  # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "17.03";
+  # This value determines the NixOS release with which your system is to be
+  # compatible, in order to avoid breaking some software such as database
+  # servers. You should change this only after NixOS release notes say you
+  # should.
+  system.stateVersion = "17.09"; # Did you read the comment?
 
 }
