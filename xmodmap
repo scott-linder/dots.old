@@ -1,0 +1,4 @@
+remove mod1 = Alt_R
+remove mod4 = Super_R
+add mod1 = Super_R
+add mod4 = Alt_R

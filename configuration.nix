@@ -37,14 +37,21 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
-    vim
-    git
-    i3
     chromium
+    git
     htop
-    rxvt_unicode
+    i3
+    pavucontrol
     pciutils
+    rxvt_unicode
+    scrot
+    sxiv
+    vim_configurable
+    xorg.xbacklight
+    xorg.xmodmap
   ];
+
+  environment.variables.EDITOR = "vim";
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -69,7 +76,13 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.xserver.windowManager.i3.enable = true;
+  services.xserver.windowManager.i3 = {
+    enable = true;
+    extraSessionCommands =
+      ''
+      xmodmap ~/.xmodmap
+      '';
+  };
   services.xserver.layout = "us";
   services.xserver.xkbOptions = "ctrl:nocaps";
 
@@ -79,17 +92,22 @@
   # Enable the KDE Desktop Environment.
   # services.xserver.displayManager.sddm.enable = true;
   # services.xserver.desktopManager.plasma5.enable = true;
-  
+
   fonts.fonts = with pkgs; [
     corefonts
     font-droid
   ];
 
+  hardware.pulseaudio = {
+    enable = true;
+    support32Bit = true;
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.scott = {
     isNormalUser = true;
     uid = 1000;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "sound" ];
   };
 
   # This value determines the NixOS release with which your system is to be
