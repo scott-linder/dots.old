@@ -99,10 +99,13 @@ bindsym $mod+b exec chromium
 bindsym $mod+s exec scrot
 bindsym $mod+Shift+S exec "scrot -w"
 
+bindsym $mod+comma exec "i3lock -c 000000 -e -f"
+
 bindsym XF86MonBrightnessDown exec --no-startup-id "xbacklight -time 0 - 10"
 bindsym XF86MonBrightnessUp exec --no-startup-id "xbacklight -time 0 + 10"
 
-bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume 0 -5%"
-bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume 0 +5%"
+bindsym XF86AudioLowerVolume exec --no-startup-id "amixer -q sset Master 5%-"
+bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer -q sset Master 5%+"
+bindsym XF86AudioMute exec --no-startup-id "amixer -q sset Master toggle"
 
 bindsym $mod+m exec "scrot -u"
