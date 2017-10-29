@@ -1,15 +1,6 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
-
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
@@ -41,13 +32,18 @@
     git
     htop
     i3
+    keepassx2
+    lm_sensors
+    openvpn
     pavucontrol
     pciutils
     rxvt_unicode
     scrot
     sxiv
     vim_configurable
+    xdg-user-dirs
     xorg.xbacklight
+    xorg.xev
     xorg.xmodmap
   ];
 
@@ -92,6 +88,29 @@
   # Enable the KDE Desktop Environment.
   # services.xserver.displayManager.sddm.enable = true;
   # services.xserver.desktopManager.plasma5.enable = true;
+
+  services.openvpn.servers = {
+    home = {
+      config =
+        ''
+        client
+        dev tun
+        proto udp
+        remote boron.scottlinder.com 1195
+        resolv-retry infinite
+        nobind
+        ca /root/.vpn/ca.crt
+        cert /root/.vpn/client1.crt
+        key /root/.vpn/client1.key
+        remote-cert-tls server
+        tls-auth /root/.vpn/ta.key 1
+        cipher AES-256-CBC
+        '';
+      up = "echo nameserver $nameserver | ${pkgs.openresolv}/sbin/resolvconf -m 0 -a $dev";
+      down = "${pkgs.openresolv}/sbin/resolvconf -d $dev";
+      autoStart = false;
+    };
+  };
 
   fonts.fonts = with pkgs; [
     corefonts
