@@ -1,17 +1,11 @@
 { config, pkgs, ... }:
 
-let
-  lanGateway = "192.168.1.1";
-  lanPrefixLength = 24;
-  dhcpLower = "192.168.1.100";
-  dhcpUpper = "192.168.1.254";
-in
 {
   boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = false;
+  boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "boron";
-  networking.wireless.enable = false;
+  networking.hostName = "boron"; # Define your hostname.
+  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   i18n = {
     consoleFont = "Lat2-Terminus16";
@@ -21,73 +15,53 @@ in
 
   time.timeZone = "America/New_York";
 
+  nixpkgs.config.allowUnfree = true;
+
   environment.systemPackages = with pkgs; [
     git
-    htop
-    lm_sensors
-    ntfs3g
-    pciutils
-    rxvt_unicode.terminfo
-    unzip
+    i3
     vim
     wget
-    zip
   ];
 
   environment.variables.EDITOR = "vim";
+
   programs.bash.enableCompletion = true;
+  programs.ssh.startAgent = true;
 
-  services.openssh.enable = true;
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
 
-  networking.firewall = {
+  services.xserver.enable = true;
+  services.xserver.layout = "us";
+  services.xserver.xkbOptions = "ctrl:nocaps";
+  services.xserver.windowManager.i3 = {
     enable = true;
-    allowPing = true;
-    trustedInterfaces = [ "lo" "enp2s0" ];
-    allowedTCPPorts = [ ];
-    allowedUDPPorts = [ ];
   };
-
-  networking.nat = {
+  services.xserver.displayManager.sddm = {
     enable = true;
-    internalIPs = [ "${lanGateway}/${(toString lanPrefixLength)}" ];
-    externalInterface = "eno1";
+    autoLogin.enable = true;
+    autoLogin.user = "scott";
   };
+  services.xserver.desktopManager.default = "none";
+  services.xserver.windowManager.default = "i3";
 
-  networking.interfaces = {
-    eno1 = {
-      useDHCP = true;
-    };
+  fonts.fonts = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    corefonts
+  ];
 
-    enp2s0 = {
-      ipv4.addresses = [
-        { address = lanGateway; prefixLength = lanPrefixLength; }
-      ];
-    };
-  };
-
-  networking.extraHosts = ''
-    ${lanGateway} ${config.networking.hostName}
-  '';
-
-  services.dnsmasq = {
-    enable = true;
-    servers = [ "8.8.8.8" "8.8.4.4" ];
-    extraConfig = ''
-      domain=lan
-      interface=enp2s0
-      bind-interfaces
-      dhcp-range=${dhcpLower},${dhcpUpper},24h
-      dhcp-authoritative
-      expand-hosts
-      domain-needed
-    '';
-  };
-
-  users.extraUsers.scott = {
+  users.users.scott = {
     isNormalUser = true;
-    uid = 1000;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "sudo" "dialout" ];
   };
 
-  system.stateVersion = "18.03";
+  # This value determines the NixOS release with which your system is to be
+  # compatible, in order to avoid breaking some software such as database
+  # servers. You should change this only after NixOS release notes say you
+  # should.
+  system.stateVersion = "19.03"; # Did you read the comment?
+
 }
