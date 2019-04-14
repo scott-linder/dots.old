@@ -2,8 +2,8 @@ URxvt*saveLines: 12000
 URxvt*transparent: false
 URxvt*foreground: white
 URxvt*background: #1c1c1c
-URxvt*font: xft:Droid Sans Mono:pixelsize=14:antialias=true:hinting=true
-URxvt*boldFont: xft:Droid Sans Mono:bold:pixelsize=14:antialias=true:hinting=true
+URxvt*font: xft:Droid Sans Mono:pixelsize=16:antialias=true:hinting=true
+URxvt*boldFont: xft:Droid Sans Mono:bold:pixelsize=16:antialias=true:hinting=true
 URxvt*scrollBar: false
 URxvt*color4: RoyalBlue
 URxvt*color12: RoyalBlue
