@@ -10,6 +10,8 @@
   time.timeZone = "America/New_York";
   nixpkgs.config.allowUnfree = true;
 
+  networking.firewall.enable = true;
+
   environment.systemPackages = with pkgs; [
     chromium
     cockatrice
@@ -26,7 +28,7 @@
     gotools
     htop
     i3
-    jre
+    jetbrains.jdk
     keepassx2
     keybase
     lm_sensors

@@ -12,6 +12,22 @@
   networking.hostName = "boron";
   networking.wireless.enable = true;
 
+  environment.systemPackages = with pkgs; [
+    steam
+  ];
+
+  # For steam
+  hardware.pulseaudio.support32Bit = true;
+  hardware.opengl.driSupport32Bit = true;
+  networking.firewall.allowedTCPPorts = [
+    27036
+    27037
+  ];
+  networking.firewall.allowedUDPPorts = [
+    27031
+    27036
+  ];
+
   services.xserver.enable = true;
   services.xserver.layout = "us";
   services.xserver.xkbOptions = "ctrl:nocaps";
